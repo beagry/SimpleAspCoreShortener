@@ -5,10 +5,10 @@ namespace SimpleUrlShortenerSPA.Models
     public interface IShortUrlsRepository
     {        
         IEnumerable<ShortedUrlEntity> getAll();
-        ShortedUrlEntity findById(int id);
-        void save(ShortedUrlEntity entity);
-        void update(ShortedUrlEntity entity);
-        void delete(ShortedUrlEntity entity);
-        void delete(int id);
+        ShortedUrlEntity GetShortedUrl(int id);
+        void Create(ShortedUrlEntity entity);
+        void Update(ShortedUrlEntity entity);
+        void Delete(int id);
+        void Save();
     }
 }
