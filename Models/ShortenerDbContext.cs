@@ -12,7 +12,7 @@ namespace SimpleUrlShortenerSPA.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TestDatabase;Trusted_Connection=True;");
+            optionsBuilder.UseSqlite("Filename=./TestDatabase.db");
         }
 
         public DbSet<ShortedUrl> ShortedUrls { get; set; }
