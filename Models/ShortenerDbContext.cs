@@ -5,9 +5,15 @@ namespace SimpleUrlShortenerSPA.Models
 {
     public class ShortenerDbContext : DbContext 
     {
+        public ShortenerDbContext(){ }
         public ShortenerDbContext(DbContextOptions<ShortenerDbContext> options) 
         : base(options)
         { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=TestDatabase;Trusted_Connection=True;");
+        }
 
         public DbSet<ShortedUrl> ShortedUrls { get; set; }
     }
