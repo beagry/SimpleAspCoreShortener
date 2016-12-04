@@ -9,10 +9,10 @@ import { Http } from '@angular/http';
 export class UrlsHistoryComponent {
     public urls: UrlHistoryItem[];
 
-    constructor() { //http: Http) {
-        // http.get('/api/History').subscribe(r =>{
-            // this.urls = r.json() as UrlHistoryItem[];
-        // })
+    constructor(http: Http) {
+        http.get('/api/history').subscribe(r =>{
+            this.urls = r.json() as UrlHistoryItem[];
+        })
     }
 }
 

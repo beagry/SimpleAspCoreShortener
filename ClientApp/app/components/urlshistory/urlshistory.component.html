@@ -1,26 +1,26 @@
-<div class="col-md-8 col-md-offset-2">
-<h3>Your history</h3>
-<p>All what you did before</p>
+<div class="col-md-8 col-md-offset-2"> 
+    <a [routerLink]="['/home']" class="btn-link"><<Back</a>
+    <h3>Your history</h3>
+    <p>All what you did before</p>
 
-<p *ngIf="!urls"><em>Loading...</em></p>
+    <p *ngIf="!urls"><em>Loading...</em></p>
 
-<table class='table'> 
-     <!--*ngIf="urls">-->
-    <thead>
-        <tr>
-            <th>Url</th>
-            <th>Short Url</th>
-            <th>Date</th>
-        </tr>
-    </thead>
+    <table class='table' *ngIf="urls">
+        <thead>
+            <tr>
+                <th>Url</th>
+                <th>Short Url</th>
+                <th>Date</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        <!--<tr *ngFor="let url of urls">
-            <td>{{ url.url }}</td>
-            <td>{{ url.shortUrl }}</td>
-            <td>{{ url.createDate }}</td>
-        </tr>-->
-    </tbody>
+        <tbody>
+            <tr *ngFor="let url of urls">
+                <td><a href={{url.url}}>{{ url.url }}</a></td>
+                <td><a href={{url.shortUrl}}>{{ url.shortUrl }}</a></td>
+                <td>{{ url.createDate | date:'medium' }}</td>
+            </tr>
+        </tbody>
 
-</table>
+    </table>
 </div>
