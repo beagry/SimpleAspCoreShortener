@@ -1,0 +1,26 @@
+<div class="col-md-8 col-md-offset-2">
+<h3>Your history</h3>
+<p>All what you did before</p>
+
+<p *ngIf="!urls"><em>Loading...</em></p>
+
+<table class='table'> 
+     <!--*ngIf="urls">-->
+    <thead>
+        <tr>
+            <th>Url</th>
+            <th>Short Url</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!--<tr *ngFor="let url of urls">
+            <td>{{ url.url }}</td>
+            <td>{{ url.shortUrl }}</td>
+            <td>{{ url.createDate }}</td>
+        </tr>-->
+    </tbody>
+
+</table>
+</div>
