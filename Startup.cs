@@ -54,6 +54,11 @@ namespace SimpleUrlShortenerSPA
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "urls",
+                    template: "u{url}",
+                    defaults: new { controller = "Home", action = "GetUrl" }
+                );
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 

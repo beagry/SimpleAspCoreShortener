@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SimpleUrlShortenerSPA.Models 
 {
-    public interface IShortUrlsRepository : IDisposable
+    public interface IShortUrlsRepository
     {        
         IEnumerable<ShortedUrlEntity> getAll();
         ShortedUrlEntity GetShortedUrl(int id);

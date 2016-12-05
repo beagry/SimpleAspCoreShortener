@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SimpleUrlShortenerSPA.Models
 {
-    public class ShortUrlsRepository : IShortUrlsRepository, IDisposable
+    public class ShortUrlsRepository : IShortUrlsRepository
     {
         ShortenerDbContext database;
         public ShortUrlsRepository() 
@@ -36,24 +36,5 @@ namespace SimpleUrlShortenerSPA.Models
             database.Entry(entity).State = EntityState.Modified;
         }
         public void Save() { database.SaveChanges(); }
-
-
-        #region IDisposable Support
-        private bool disposedValue = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    database.Dispose();
-                }
-
-                disposedValue = true;
-            }
-        }
-        public void Dispose() { Dispose(true); }
-        #endregion //end IDisposable
     }
 }

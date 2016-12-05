@@ -9,19 +9,13 @@ namespace SimpleUrlShortenerSPA.Controllers
 {
     public class HomeController : Controller, IDisposable
     {
+        static List<string> masks = new List<string> { "http://", "https://" };
         private IShortUrlsRepository repo;
 
         public HomeController(IShortUrlsRepository repository)
         {
             repo = repository;
         }
-
-        ~HomeController()
-        {
-            repo.Dispose();
-        }
-    
-        static List<string> masks = new List<string> { "http://", "https://" };
 
         #region Web Api
         public class UrlShorterRequest
@@ -55,6 +49,18 @@ namespace SimpleUrlShortenerSPA.Controllers
         {
             System.Console.WriteLine(">>>Return history");
             return repo.getAll();
+        }
+
+        public IActionResult GetUrl(string url)
+        {
+            if (url == null || url == string.Empty)
+                return new BadRequestResult();
+            
+            var item = repo.getAll().FirstOrDefault(r => r.ShortUrlSuffix.Equals(url));
+            if ( item != null) //bug 'if ? true : false' not working  
+                return new RedirectResult(item.Url, true); 
+            else 
+                return new BadRequestResult();
         }
 
         private static Random random = new Random();
