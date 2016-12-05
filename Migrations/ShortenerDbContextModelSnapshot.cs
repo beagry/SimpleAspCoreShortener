@@ -15,14 +15,14 @@ namespace SimpleUrlShortenerSPA.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
 
-            modelBuilder.Entity("SimpleUrlShortenerSPA.Models.ShortedUrl", b =>
+            modelBuilder.Entity("SimpleUrlShortenerSPA.Models.ShortedUrlEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("ShortUrl");
+                    b.Property<string>("ShortUrlSuffix");
 
                     b.Property<string>("Url");
 

@@ -7,26 +7,20 @@ using SimpleUrlShortenerSPA.Models;
 
 namespace SimpleUrlShortenerSPA.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller, IDisposable
     {
 
-        static List<ShortedUrlEntity> history = new List<ShortedUrlEntity>() {
-            new ShortedUrlEntity() { 
-            Url = "https://nope.com",
-            ShortUrlSuffix = "https://ya.ru",
-            CreateDate = DateTime.Now
-            },
-            new ShortedUrlEntity() { 
-            Url = "https://google.com",
-            ShortUrlSuffix = "https://ya.ru",
-            CreateDate = DateTime.Now
-            },
-        };
+        //DOTO add DepencyInjection
+        private ShortUrlsRepository repo = new ShortUrlsRepository();
 
+        ~HomeController()
+        {
+            repo.Dispose();
+        }
+    
         static List<string> masks = new List<string> { "http://", "https://" };
 
         #region Web Api
-
         public class UrlShorterRequest
         {
             public string url { get; set; }
@@ -47,8 +41,9 @@ namespace SimpleUrlShortenerSPA.Controllers
                 ShortUrlSuffix = RandomString(),
                 CreateDate = DateTime.Now
             };
-            history.Add(shortenUrl);
-            System.Console.WriteLine($">>>Url successfuly shorted { request.url }");
+            repo.Create(shortenUrl);
+            repo.Save();
+            System.Console.WriteLine($">>>Short Url successfuly created { request.url }");
             return Json(shortenUrl);
         }
 
@@ -56,7 +51,7 @@ namespace SimpleUrlShortenerSPA.Controllers
         public IEnumerable<ShortedUrlEntity> GetHistoryPage(int page = 1, int itemsPerPage = 10)
         {
             System.Console.WriteLine(">>>Return history");
-            return history;
+            return repo.getAll();
         }
 
         private static Random random = new Random();

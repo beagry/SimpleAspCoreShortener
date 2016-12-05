@@ -7,7 +7,10 @@ namespace SimpleUrlShortenerSPA.Models
     public class ShortUrlsRepository : IShortUrlsRepository, IDisposable
     {
         ShortenerDbContext database;
-        public ShortUrlsRepository() {}
+        public ShortUrlsRepository() 
+        {
+            database = new ShortenerDbContext();
+        }
 
         public void Create(ShortedUrlEntity entity)
         {

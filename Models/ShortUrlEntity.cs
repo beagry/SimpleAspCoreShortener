@@ -3,6 +3,7 @@ using System;
 
 namespace SimpleUrlShortenerSPA.Models
 {
+    //TODO add props requirements
     public class ShortedUrlEntity
     {
         public int Id { get; set; }

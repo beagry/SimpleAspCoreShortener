@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SimpleUrlShortenerSPA.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace SimpleUrlShortenerSPA.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    ShortUrl = table.Column<string>(nullable: true),
+                    ShortUrlSuffix = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
