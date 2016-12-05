@@ -7,7 +7,7 @@ namespace SimpleUrlShortenerSPA.Models
     {
         public int Id { get; set; }
         public string Url { get; set; }
-        public string ShortUrl { get; set; }
+        public string ShortUrlSuffix { get; set; }
         public DateTime CreateDate { get; set; }
     }
 }

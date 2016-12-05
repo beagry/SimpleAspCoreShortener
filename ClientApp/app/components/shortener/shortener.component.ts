@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { UrlHistoryItem } from '../IUrlHistoryItem';
+
 @Component({
     selector: 'shortener',
     templateUrl: './shortener.component.html',
@@ -14,7 +16,9 @@ import 'rxjs/add/observable/throw';
 
 export class ShortenerComponent {
     public url: string = "";
-    public answer: string = "";
+    public answer: UrlHistoryItem = null;
+    public requestInProgress: boolean = false;
+    public errorMessage : string  = "";
 
     constructor(private http: Http) {
     }
@@ -26,10 +30,23 @@ export class ShortenerComponent {
             return;
         }
 
+        this.errorMessage = "";
+        this.answer = null;
+        this.requestInProgress = true;
         const body = JSON.stringify({ url : this.url });
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
-        this.http.post('/api/shorten', body, { headers: headers }).subscribe(r =>{
-            this.answer = r.text();
-        });
+        this.http.post('/api/shorten', body, { headers: headers })
+        .subscribe(r => {
+                this.answer = r.json() as UrlHistoryItem;
+            }, 
+            err => {
+                console.log(err)
+                //TODO handle different state codes
+                this.errorMessage = "Что-то пошло не так :(";
+            }, 
+            () => {
+                console.log("Completed")
+                this.requestInProgress = false;
+            });
     }
 }

@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { UrlHistoryItem } from '../IUrlHistoryItem';
 
 @Component ({
     selector: 'shortener',
     templateUrl: './urlshistory.component.html'
 })
 
-export class UrlsHistoryComponent {
+export class UrlsHistoryComponent implements OnInit {
     public urls: UrlHistoryItem[];
 
-    constructor(http: Http) {
-        http.get('/api/history').subscribe(r =>{
+    constructor(private http: Http) {
+    }
+
+    ngOnInit(){
+        this.http.get('/api/history').subscribe(r =>{
             this.urls = r.json() as UrlHistoryItem[];
         })
     }
-}
-
-interface UrlHistoryItem {
-    id: number
-    url : string
-    shortUrl: string
-    createDate: Date
 }

@@ -1,13 +1,19 @@
 <div class="shortener-container">
     <div class="col-md-8 col-md-offset-2"> 
         <h3>Easy make your urls more readable</h3>
-        <div class="input-group input-group-lg">
-            <input id="urlInput" type="text" [(ngModel)]="url" class="form-control" placeholder="Your url..."/>
-            <span class="input-group-btn">
-                <button id="acceptButton"  (click)="shortenUrl()" class="btn btn-success" type="button">Make it cool!</button>
-            </span>
+        <form ng-disabled="requestInProgress">
+            <div  class="input-group input-group-lg">
+                <input id="urlInput" name="url" class="form-control" type="text" required [(ngModel)]="url"  placeholder="Your url..."/>
+                <span class="input-group-btn">
+                    <button id="acceptButton"  (click)="shortenUrl()" class="btn btn-success" type="submit">Make it cool!</button>
+                </span>
+            </div>
+        </form>
+        <p ng-if="errorMessage" style="color: red" >{{errorMessage}}</p>
+        <div *ngIf="answer" class="input-group col-xs-4" style="margin-top:10px" >
+            <span class="input-group-addon" id="sizing-addon2">Url:</span>
+            <input value="{{answer.shortUrlSuffix}}" type="text" class="form-control" aria-describedby="sizing-addon2">
         </div>
         <a [routerLink]="['/history']" class="btn btn-link">History...</a>
-        <p *ngIf="answer">Answer: {{answer}}</p>
     </div>
 </div>
