@@ -2,11 +2,12 @@
     <div class="col-md-8 col-md-offset-2"> 
         <h3>Easy make your urls more readable</h3>
         <div class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="Your url..."/>
+            <input id="urlInput" type="text" [(ngModel)]="url" class="form-control" placeholder="Your url..."/>
             <span class="input-group-btn">
-                <button class="btn btn-success" type="button">Make it cool!</button>
+                <button id="acceptButton"  (click)="shortenUrl()" class="btn btn-success" type="button">Make it cool!</button>
             </span>
         </div>
         <a [routerLink]="['/history']" class="btn btn-link">History...</a>
+        <p *ngIf="answer">Answer: {{answer}}</p>
     </div>
 </div>
