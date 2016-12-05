@@ -9,9 +9,12 @@ namespace SimpleUrlShortenerSPA.Controllers
 {
     public class HomeController : Controller, IDisposable
     {
+        private IShortUrlsRepository repo;
 
-        //DOTO add DepencyInjection
-        private ShortUrlsRepository repo = new ShortUrlsRepository();
+        public HomeController(IShortUrlsRepository repository)
+        {
+            repo = repository;
+        }
 
         ~HomeController()
         {

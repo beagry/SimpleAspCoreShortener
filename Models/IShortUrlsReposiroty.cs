@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace SimpleUrlShortenerSPA.Models 
 {
-    public interface IShortUrlsRepository
+    public interface IShortUrlsRepository : IDisposable
     {        
         IEnumerable<ShortedUrlEntity> getAll();
         ShortedUrlEntity GetShortedUrl(int id);

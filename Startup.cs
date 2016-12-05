@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using SimpleUrlShortenerSPA.Models;
+
 namespace SimpleUrlShortenerSPA
 {
     public class Startup
@@ -26,6 +28,7 @@ namespace SimpleUrlShortenerSPA
         {
             // Add framework services.
             services.AddMvc();
+            services.AddSingleton<IShortUrlsRepository, ShortUrlsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
