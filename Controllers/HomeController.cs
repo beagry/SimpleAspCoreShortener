@@ -33,9 +33,14 @@ namespace SimpleUrlShortenerSPA.Controllers
             if (!masks.Any(s => request.url.StartsWith(s, StringComparison.OrdinalIgnoreCase)))
                 return new BadRequestResult();
             
+            var randString = "";
+            do {
+                randString = RandomString();
+            } while(repo.getAll().Any(s => s.ShortUrlSuffix.Equals(s)));
+
             ShortedUrlEntity shortenUrl = new ShortedUrlEntity() {
                 Url = request.url,
-                ShortUrlSuffix = RandomString(),
+                ShortUrlSuffix = randString,
                 CreateDate = DateTime.Now
             };
             repo.Create(shortenUrl);
