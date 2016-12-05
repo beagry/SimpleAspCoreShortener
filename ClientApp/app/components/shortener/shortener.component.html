@@ -12,7 +12,7 @@
         <p ng-if="errorMessage" style="color: red" >{{errorMessage}}</p>
         <div *ngIf="answer" class="input-group col-xs-4" style="margin-top:10px" >
             <span class="input-group-addon" id="sizing-addon2">Url:</span>
-            <input value="{{answer.shortUrlSuffix}}" type="text" class="form-control" aria-describedby="sizing-addon2">
+            <input value="{{answer.shortUrlSuffix | concat}}" type="text" class="form-control" aria-describedby="sizing-addon2">
         </div>
         <a [routerLink]="['/history']" class="btn btn-link">History...</a>
     </div>

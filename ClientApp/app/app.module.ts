@@ -6,13 +6,15 @@ import { AppComponent } from './components/app/app.component'
 
 import { ShortenerComponent } from  './components/shortener/shortener.component';
 import { UrlsHistoryComponent } from './components/urlshistory/urlshistory.component';
+import {ConcatStringPipe} from './components/concat-string.pipe';
 
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
         ShortenerComponent,
-        UrlsHistoryComponent
+        UrlsHistoryComponent,
+        ConcatStringPipe
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { Http } from '@angular/http';
 import { UrlHistoryItem } from '../IUrlHistoryItem';
+import {ConcatStringPipe} from '../concat-string.pipe';
 
 @Component ({
     selector: 'shortener',
-    templateUrl: './urlshistory.component.html'
+    templateUrl: './urlshistory.component.html',
 })
 
 export class UrlsHistoryComponent implements OnInit {
