@@ -39,7 +39,12 @@ export class ShortenerComponent {
             err => {
                 console.log(err)
                 //TODO handle different state codes
-                this.errorMessage = "Что-то пошло не так :(";
+                if (err.status === 500)
+                    this.errorMessage = "Ошибка на стороне сервера";
+                if (err._body)
+                    this.errorMessage = err._body
+                else
+                    this.errorMessage = "Что-то пошло не так :(";
             }, 
             () => {
                 console.log("Completed")

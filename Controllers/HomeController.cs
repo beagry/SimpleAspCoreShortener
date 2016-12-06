@@ -28,11 +28,11 @@ namespace SimpleUrlShortenerSPA.Controllers
         public IActionResult ShortenUrl([FromBody]UrlShorterRequest request)
         {
             if (request.url == null || request.url == string.Empty) 
-                return new BadRequestResult();
+                return new BadRequestObjectResult("Url не может быть пустым");
             
             //TODO: check URL with regexp /http(s)?://[A-Za-z0-9\.]+\.[A-Za-z0-9]+.*/
             if (!masks.Any(s => request.url.StartsWith(s, StringComparison.OrdinalIgnoreCase)))
-                return new BadRequestResult();
+                return new BadRequestObjectResult("Url должен начинаться с 'http://' или 'https://'");
             
             var randString = "";
             do {
@@ -44,9 +44,15 @@ namespace SimpleUrlShortenerSPA.Controllers
                 ShortUrlSuffix = randString,
                 CreateDate = DateTime.Now
             };
-            repo.Create(shortenUrl);
-            repo.Save();
-            System.Console.WriteLine($">>>Short Url successfuly created { request.url }");
+            try {
+                repo.Create(shortenUrl);
+                repo.Save();
+            }
+            catch(Exception)
+            {
+                return new StatusCodeResult(500);
+            }
+            System.Console.WriteLine($">>>Tiny Url successfuly created { request.url }");
             return Json(shortenUrl);
         }
 
