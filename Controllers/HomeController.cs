@@ -7,6 +7,7 @@ using SimpleUrlShortenerSPA.Models;
 
 namespace SimpleUrlShortenerSPA.Controllers
 {
+    //BUG: angular app crash after return from outer link 
     public class HomeController : Controller, IDisposable
     {
         static List<string> masks = new List<string> { "http://", "https://" };
@@ -59,13 +60,13 @@ namespace SimpleUrlShortenerSPA.Controllers
         public IActionResult GetUrl(string url)
         {
             if (url == null || url == string.Empty)
-                return new BadRequestResult();
+                return new RedirectToActionResult("Index","Home",null);
             
             var item = repo.getAll().FirstOrDefault(r => r.ShortUrlSuffix.Equals(url));
             if ( item != null) //bug 'if ? true : false' not working  
                 return new RedirectResult(item.Url, true); 
             else 
-                return new BadRequestResult();
+                return new RedirectToActionResult("Index","Home",null);
         }
 
         private static Random random = new Random();
