@@ -41,7 +41,7 @@ export class ShortenerComponent {
                 //TODO handle different state codes
                 if (err.status === 500)
                     this.errorMessage = "Ошибка на стороне сервера";
-                if (err._body)
+                if (err.status === 400 && err._body)
                     this.errorMessage = err._body
                 else
                     this.errorMessage = "Что-то пошло не так :(";
