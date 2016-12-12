@@ -19,4 +19,15 @@ export class UrlsHistoryComponent implements OnInit {
             this.urls = r.json() as UrlHistoryItem[];
         })
     }
+
+    public getDateFormat(date)
+    {
+        var inputDate = new Date(date);
+        if (inputDate.setHours(0,0,0,0) == new Date().setHours(0,0,0,0)) //today
+        {
+            return 'HH:mm:ss';
+        }
+        else
+            return 'yMMMd';
+    }
 }

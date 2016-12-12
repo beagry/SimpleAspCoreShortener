@@ -21,7 +21,7 @@
                 <td>
                     <a href="{{ url.shortUrlSuffix | concat}}">{{ url.shortUrlSuffix | concat}}</a>
                 </td>
-                <td>{{ url.createDate | date:'medium' }}</td> 
+                <td>{{ url.createDate | date:getDateFormat(url.createDate) }}</td> 
                 <td>{{ url.navigationsCount }}</td>
             </tr>
         </tbody>
