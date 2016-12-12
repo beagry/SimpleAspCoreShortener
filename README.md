@@ -1,7 +1,11 @@
 # SimpleAspCoreShortener 
-### Sample App, that repeats [bitly.com](https://bitly.com) or [goo.gl](https://goo.gl) functionality.
 
-##### This project made with `macOs 10.12.1` and `Visual Studio Core`.
+##Sample: [shrt1.azurewebsites.net](http://shrt1.azurewebsites.net)
+---
+
+#### Simple App, that repeats [bitly.com](https://bitly.com) or [goo.gl](https://goo.gl) functionality.
+
+##### This project made with `macOs 10.12.1` and `Visual Studio Core console app`.
 
 ---
 How to run:
