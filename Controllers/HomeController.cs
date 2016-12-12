@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 using SimpleUrlShortenerSPA.Models;
 
@@ -63,14 +64,29 @@ namespace SimpleUrlShortenerSPA.Controllers
             return repo.getAll();
         }
 
-        public IActionResult GetUrl(string url)
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)] 
+        public async Task<IActionResult> GetUrl(string url)
         {
             if (url == null || url == string.Empty)
                 return new RedirectToActionResult("Index","Home",null);
             
             var item = repo.getAll().FirstOrDefault(r => r.ShortUrlSuffix.Equals(url));
-            if ( item != null) //bug 'if ? true : false' not working  
-                return new RedirectResult(item.Url, true); 
+            if ( item != null)  
+            {
+                await Task.Run(() => {
+                        item.NavigationsCount++;
+                        try
+                        {
+                            repo.Update(item);
+                            repo.Save();
+                        }
+                        catch(Exception e)
+                        {
+                            System.Console.WriteLine($"HomeController.GetUrl() exception: {e.ToString()}");
+                        }
+                    });
+                return new RedirectResult(item.Url, true);
+            } 
             else 
                 return new RedirectToActionResult("Index","Home",null);
         }

@@ -8,9 +8,10 @@ using SimpleUrlShortenerSPA.Models;
 namespace SimpleUrlShortenerSPA.Migrations
 {
     [DbContext(typeof(ShortenerDbContext))]
-    partial class ShortenerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161212123425_Added RoutesCount column plus empty validations")]
+    partial class AddedRoutesCountcolumnplusemptyvalidations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");
@@ -22,7 +23,7 @@ namespace SimpleUrlShortenerSPA.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<int>("NavigationsCount");
+                    b.Property<int>("RoutesCount");
 
                     b.Property<string>("ShortUrlSuffix")
                         .IsRequired();

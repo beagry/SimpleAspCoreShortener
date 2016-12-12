@@ -5,22 +5,25 @@
 
     <p *ngIf="!urls"><em>Loading...</em></p>
 
-    <table class='table' *ngIf="urls">
+    <table class='table table-hover' *ngIf="urls">
         <thead>
             <tr>
-                <th>Url</th>
+                <th>Original Url</th>
                 <th>Short Url</th>
-                <th>Date</th>
+                <th>Created</th>
+                <th>All clicks</th>
             </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let url of urls">
                 <td><a href={{url.url}}>{{ url.url }}</a></td>
-                <td><a href="{{ url.shortUrlSuffix | concat}}">{{ url.shortUrlSuffix | concat}}</a></td>
+                <td>
+                    <a href="{{ url.shortUrlSuffix | concat}}">{{ url.shortUrlSuffix | concat}}</a>
+                </td>
                 <td>{{ url.createDate | date:'medium' }}</td> 
+                <td>{{ url.navigationsCount }}</td>
             </tr>
         </tbody>
-
     </table>
 </div>
