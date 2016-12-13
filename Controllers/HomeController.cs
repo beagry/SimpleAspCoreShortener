@@ -11,6 +11,10 @@ namespace SimpleUrlShortenerSPA.Controllers
     //BUG: angular app crash after return from outer link 
     public class HomeController : Controller, IDisposable
     {
+        public static readonly string URL_ERROR_PROTOCOL_REQ = "Url должен начинаться с 'http://' или 'https://'";
+        public static readonly string URL_ERROR_EMPTY = "Url не может быть пустым";
+
+
         static List<string> masks = new List<string> { "http://", "https://" };
         private IShortUrlsRepository repo;
 
@@ -29,11 +33,11 @@ namespace SimpleUrlShortenerSPA.Controllers
         public IActionResult ShortenUrl([FromBody]UrlShorterRequest request)
         {
             if (request.url == null || request.url == string.Empty) 
-                return new BadRequestObjectResult("Url не может быть пустым");
+                return new BadRequestObjectResult(URL_ERROR_EMPTY);
             
             //TODO: check URL with regexp /http(s)?://[A-Za-z0-9\.]+\.[A-Za-z0-9]+.*/
             if (!masks.Any(s => request.url.StartsWith(s, StringComparison.OrdinalIgnoreCase)))
-                return new BadRequestObjectResult("Url должен начинаться с 'http://' или 'https://'");
+                return new BadRequestObjectResult(URL_ERROR_PROTOCOL_REQ);
             
             var randString = "";
             do {
