@@ -16,3 +16,8 @@ How to run:
   5. Run app with **`dotnet run`** command
   6. Enjoy :)
   
+  
+---
+###Unit tests
+To run **unit tests** run `dotnet test` command from ***"/test"*** folder
+  
